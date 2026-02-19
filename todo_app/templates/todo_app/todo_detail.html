@@ -1,0 +1,23 @@
+{% extends 'todo_app/base.html' %}
+
+{% block title %}{{ task.title }}{% endblock %}
+
+{% block content %}
+<div style="max-width:600px; margin:0 auto; background:white; padding:30px; border-radius:12px;">
+    <h2>{{ task.title }}</h2>
+    <p><strong>Статус:</strong> {% if task.completed %}✅ Выполнено{% else %}⏳ В работе{% endif %}</p>
+    <p><strong>Приоритет:</strong> {{ task.get_priority_display }}</p>
+    <p><strong>Создана:</strong> {{ task.created_at|date:"d.m.Y в H:i" }}</p>
+    
+    {% if task.description %}
+        <h3>Описание:</h3>
+        <p>{{ task.description|linebreaks }}</p>
+    {% endif %}
+
+    <div style="margin-top:30px">
+        <a href="{% url 'todo_edit' task.pk %}" class="btn" style="background:#007bff;color:white">Редактировать</a>
+        <a href="{% url 'todo_delete' task.pk %}" class="btn btn-danger">Удалить задачу</a>
+        <a href="{% url 'todo_list' %}" class="btn">← Назад к списку</a>
+    </div>
+</div>
+{% endblock %}
