@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TODO — Мои задачи{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'todo_app/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'todo_list' %}">TODO_LIST</a></h1>
+        <nav>
+            <a href="{% url 'todo_list' %}">Все задачи</a>
+            <a href="{% url 'todo_create' %}">+ Новая задача</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

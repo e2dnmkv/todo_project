@@ -1,0 +1,17 @@
+{% extends 'todo_app/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div style="max-width:600px; margin:40px auto; background:white; padding:30px; border-radius:12px;">
+    <h2>{{ title }}</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success" style="margin-top:20px">💾 Сохранить задачу</button>
+    </form>
+    
+    <a href="{% url 'todo_list' %}" style="margin-top:15px; display:inline-block">Отмена</a>
+</div>
+{% endblock %}

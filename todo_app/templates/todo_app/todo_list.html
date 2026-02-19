@@ -1,0 +1,25 @@
+{% extends 'todo_app/base.html' %}
+
+{% block title %}Список задач{% endblock %}
+
+{% block content %}
+<h2>Все задачи ({{ tasks|length }})</h2>
+
+{% if not tasks %}
+    <p>Пока нет задач. <a href="{% url 'todo_create' %}">Создать первую!</a></p>
+{% else %}
+    <div class="tasks">
+        {% for task in tasks %}
+        <div class="task-item {% if task.completed %}completed{% endif %} priority-{{ task.priority|lower }}">
+            <input type="checkbox" {% if task.completed %}checked{% endif %} disabled>
+            <div style="flex-grow:1">
+                <a href="{% url 'todo_detail' task.pk %}"><strong>{{ task.title }}</strong></a>
+                <small style="color:#666">• {{ task.get_priority_display }} • {{ task.created_at|date:"d.m.Y H:i" }}</small>
+            </div>
+            <a href="{% url 'todo_edit' task.pk %}" class="btn" style="background:#ffc107;color:#000">✏️</a>
+            <a href="{% url 'todo_delete' task.pk %}" class="btn btn-danger">🗑</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
